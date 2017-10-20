@@ -3,7 +3,7 @@
 @Library('MicroserviceBuilder') _
 microserviceBuilderPipeline {
   image = 'demoxxx'
-  test = 'true'
+  test = 'false'
   deploy = 'true'
-  mavenImage = 'maven:ibmjava'
+  mavenImage = 'wwdemo:images/maven-lab'
 }
