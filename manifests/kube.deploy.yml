@@ -3,12 +3,7 @@ kind: Service
 metadata:
   name: demoxxx1-svc
 spec:
-  # if your cluster supports it, uncomment the following to automatically create
-  # an external load-balanced IP for the frontend service.
-  #type: LoadBalancer
-  type: NodePort
   ports:
-  # the port that this service should serve on
   - name: http
     port: 9080
   selector:
@@ -30,3 +25,17 @@ spec:
       - name: demoxxx1
         image: demoxxx1-v1:latest
 
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: demoxxx1
+  annotations:
+    kubernetes.io/ingress.class: "istio"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /demoxxx
+        backend:
+          serviceName: demoxxx1-svc
+          servicePort: 9080
