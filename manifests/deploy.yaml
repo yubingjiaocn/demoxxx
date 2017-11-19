@@ -138,4 +138,3 @@ spec:
         backend:
           serviceName: demoxxx1-svc
           servicePort: 9080
----
