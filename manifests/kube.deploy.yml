@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: "demoxxx-service"
+  name: demoxxx1-svc
 spec:
   # if your cluster supports it, uncomment the following to automatically create
   # an external load-balanced IP for the frontend service.
@@ -11,34 +11,22 @@ spec:
   # the port that this service should serve on
   - name: http
     port: 9080
-  - name: https
-    port: 9443
-
   selector:
-    app: "demoxxx-selector"
+    app: demoxxx1
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: "demoxxx-deployment"
+  name: demoxxx1-v1
 spec:
-  # this replicas value is default
-  # modify it according to your case
   replicas: 1
   template:
     metadata:
       labels:
-        app: "demoxxx-selector"
+        app: demoxxx1
+        version: v1
     spec:
       containers:
-      - name: demoxxx
-        image: demoxxx:latest
-        readinessProbe:
-          httpGet:
-            path: /demoxxx/health
-            port: 9080
-          initialDelaySeconds: 20
-        # resources:
-        #   requests:
-        #     cpu: 100m
-        #     memory: 100Mi
+      - name: demoxxx1
+        image: demoxxx1-v1:latest
+
