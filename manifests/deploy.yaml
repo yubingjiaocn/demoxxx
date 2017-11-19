@@ -29,6 +29,8 @@ spec:
         app: demoxxx1
         version: v1
     spec:
+      imagePullSecrets:
+      - name: admin.registrykey
       containers:
       - image: demoxxx1-v1:latest
         name: demoxxx1
