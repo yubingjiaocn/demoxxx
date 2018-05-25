@@ -12,14 +12,22 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: demoxxx1-v1
+  name: demoxxx-v1
 spec:
+  # this replicas value is default
+  # modify it according to your case
+  replicas: 1
   template:
+    metadata:
       labels:
-        app: demoxxx1
-        version: v1
+        app: "demoxxx-selector"
+        version: "v1"
     spec:
       containers:
-      - image: demoxxx1-v1:latest
-        name: demoxxx1
-        resources: {}
+      - name: demoxxx
+        image: demoxxx1-v1:latest
+        readinessProbe:
+          httpGet:
+            path: /demoxxx/health
+            port: 9080
+          initialDelaySeconds: 20
